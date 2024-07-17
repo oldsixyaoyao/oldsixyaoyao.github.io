@@ -133,11 +133,7 @@
       <div class="subtitle">/RTfCaT4x8mMEh+eyIElTGT nEUpPlCcgHbo82qUpbrY= </div>
       <div class="link-list">
         
-          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
-        
-          <a class="link-btn" target="_blank" rel="noopener" href="https://store.steampowered.com" title="Steam"><i class="fa-brands fa-steam"></i></a>
-        
-          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com" title="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/oldsixyaoyao" title="GitHub"><i class="fa-brands fa-github"></i></a>
          
       </div>  
     </div>
@@ -210,7 +206,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.6k words 
+            3.4k words 
           </div>
         </div>
         
@@ -224,7 +220,7 @@
 ARM架构将4GB平均分成8个block，每个存储器512MB
 存储器映射就是给block分配地址
 其中block2设计的是片上外设，四字节(32bit)为一个单元，给这个特定地址取个别名就是寄存器映射
-寄存器编程123//51sfr PA0 0x80PA0 = 0xff;
+寄存器映射123//51sfr PA0 0x80PA0 = 0xff;
 12345//stm32强制转换成指针再解引用*(unsigned int*)(0x4002 1414) = 0xFFFF;//或者#define GPIOF_ODR *(unsigned int*)(0x4002 1414)GPIOF_ODR = 0xFFFF;
 其实就是寄存器映射
 C语言对寄存器的封装由于GPIOA~GPIOH都有一组功能相同的寄存器，偏移地址也相同，使用结构体进行封装
