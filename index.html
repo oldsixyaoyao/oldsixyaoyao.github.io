@@ -224,7 +224,8 @@ ARM架构将4GB平均分成8个block，每个存储器512MB
 12345//stm32强制转换成指针再解引用*(unsigned int*)(0x4002 1414) = 0xFFFF;//或者#define GPIOF_ODR *(unsigned int*)(0x4002 1414)GPIOF_ODR = 0xFFFF;
 其实就是寄存器映射
 3. C语言对寄存器的封装由于GPIOA~GPIOH都有一组功能相同的寄存器，偏移地址也相同，使用结构体进行封装
-12345678910111213141516171819202122typedef unsigned int uin...
+偏移地址是以字节为单位，一条就是b位，所以uint32_t刚好就定义了这个结构变量的地址
+12345678910111...
             
           </div>
         
