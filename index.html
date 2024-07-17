@@ -215,8 +215,8 @@
         
           <div class="truncate-text">
             
-              1.  使用库函数的全新代码前提：stm32f4xx.h定义了基地址和寄存器；stm32f4xx_gpio.h定义了枚举，结构体和引脚号偏移地址并且声明了函数；stm32fxx_gpio.c定义了初始化和置位复位函数
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263/*	自己写库的方法点亮LED灯  */#include &quot;stm32f4xx_gpio.h&quot;  void Delay( uint32_t nCount); /**  *   主函数，使用封装好的函数来控制LED灯  */int main(void)&#123;		GPIO_InitTypeDef InitStruct;		/*开启 GPIOF 时钟，使用外设时都要先开启它的时钟*/	RCC-&gt;AHB1ENR |= (1&lt;&lt;5);	/* LED 端口初始化 */		/*初始化PF6引脚*/	/*选择...
+              1.  使用库函数的全新代码前提：stm32f4xx.h定义了片上外设寄存器映射；stm32f4xx_gpio.h和stm32fxx_gpio.c定义了外设驱动库
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263/*	自己写库的方法点亮LED灯  */#include &quot;stm32f4xx_gpio.h&quot;  void Delay( uint32_t nCount); /**  *   主函数，使用封装好的函数来控制LED灯  */int main(void)&#123;		GPIO_InitTypeDef InitStruct;		/*开启 GPIOF 时钟，使用外设时都要先开启它的时钟*/	RCC-&gt;AHB1ENR |= (1&lt;&lt;5);	/* LED 端口初始化 */		/*初始化PF6引脚*/	/*选择要控制的GPIO引脚*/															...
             
           </div>
         
