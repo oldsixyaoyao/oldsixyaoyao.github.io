@@ -14,21 +14,21 @@
   
 
   
-  <title>hexo+github搭建个人博客 | Hexo</title>
+  <title>固件库点亮LED | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="说明使用win+X，点击Windows PowerShell（管理员）进入PowerShell(vim可选)不用vim就直接打开文件即可能查看版本不报错就是说明安装好了 下载nodejs进入官网下载nodejs，在PowerShell中使用以下命令安装hexo 123456node -v			#查看nodejs版本npm -v			#查看npm版本npm install -g cnpm	#安装cn">
+  <meta name="description" content="1.  使用库函数的全新代码前提：stm32f4xx.h定义了基地址和寄存器；stm32f4xx_gpio.h定义了枚举，结构体和引脚号偏移地址并且声明了函数；stm32fxx_gpio.c定义了初始化和置位复位函数 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo+github搭建个人博客">
-<meta property="og:url" content="http://example.com/2024/07/12/hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:title" content="固件库点亮LED">
+<meta property="og:url" content="http://example.com/2024/07/17/3.%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BA%93%E7%82%B9%E4%BA%AELED/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="说明使用win+X，点击Windows PowerShell（管理员）进入PowerShell(vim可选)不用vim就直接打开文件即可能查看版本不报错就是说明安装好了 下载nodejs进入官网下载nodejs，在PowerShell中使用以下命令安装hexo 123456node -v			#查看nodejs版本npm -v			#查看npm版本npm install -g cnpm	#安装cn">
+<meta property="og:description" content="1.  使用库函数的全新代码前提：stm32f4xx.h定义了基地址和寄存器；stm32f4xx_gpio.h定义了枚举，结构体和引脚号偏移地址并且声明了函数；stm32fxx_gpio.c定义了初始化和置位复位函数 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-07-11T17:03:53.000Z">
-<meta property="article:modified_time" content="2024-07-11T17:40:04.355Z">
+<meta property="article:published_time" content="2024-07-17T12:15:46.000Z">
+<meta property="article:modified_time" content="2024-07-17T13:43:32.556Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -179,7 +179,7 @@
        
 
 
-<article id="post-hexo-github搭建个人博客" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-3.自己搭库点亮LED" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
     
    
@@ -192,7 +192,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        hexo+github搭建个人博客
+        固件库点亮LED
       </h1>
     
   
@@ -200,51 +200,46 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-11T17:03:53.000Z" itemprop="datePublished">2024-07-12</time>
+  <time class="dt-published" datetime="2024-07-17T12:15:46.000Z" itemprop="datePublished">2024-07-17</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-  <a class="meta-cate-link" href="/categories/hexo%E6%94%BB%E7%95%A5/">hexo攻略</a>
+  <a class="meta-cate-link" href="/categories/stm32/">stm32</a>
    
 </div>
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.1k words 
+            2.2k words 
           </div>
         </div>
         
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>使用win+X，点击Windows PowerShell（管理员）进入PowerShell<br>(vim可选)不用vim就直接打开文件即可<br>能查看版本不报错就是说明安装好了</p>
-<h3 id="下载nodejs"><a href="#下载nodejs" class="headerlink" title="下载nodejs"></a>下载nodejs</h3><p>进入官网下载nodejs，在PowerShell中使用以下命令安装hexo</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">node -v			#查看nodejs版本</span><br><span class="line">npm -v			#查看npm版本</span><br><span class="line">npm install -g cnpm	#安装cnpm，-g表示全局安装</span><br><span class="line">Set-ExecutionPolicy RemoteSigned	#输入A</span><br><span class="line">cnpm install -g hexo-cli	#安装hexo</span><br><span class="line">hexo -v			#查看hexo版本</span><br></pre></td></tr></table></figure>
+          <h3 id="1-使用库函数的全新代码"><a href="#1-使用库函数的全新代码" class="headerlink" title="1.  使用库函数的全新代码"></a><font color=CornFlowerBlue>1.  使用库函数的全新代码</font></h3><p>前提：stm32f4xx.h定义了基地址和寄存器；stm32f4xx_gpio.h定义了枚举，结构体和引脚号偏移地址并且声明了函数；stm32fxx_gpio.c定义了初始化和置位复位函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">	自己写库的方法点亮LED灯</span><br><span class="line">  */</span><br><span class="line">#include &quot;stm32f4xx_gpio.h&quot;  </span><br><span class="line"></span><br><span class="line">void Delay( uint32_t nCount); </span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">  *   主函数，使用封装好的函数来控制LED灯</span><br><span class="line">  */</span><br><span class="line">int main(void)</span><br><span class="line">&#123;	</span><br><span class="line">	GPIO_InitTypeDef InitStruct;</span><br><span class="line">	</span><br><span class="line">	/*开启 GPIOF 时钟，使用外设时都要先开启它的时钟*/</span><br><span class="line">	RCC-&gt;AHB1ENR |= (1&lt;&lt;5);</span><br><span class="line"></span><br><span class="line">	/* LED 端口初始化 */</span><br><span class="line">	</span><br><span class="line">	/*初始化PF6引脚*/</span><br><span class="line">	/*选择要控制的GPIO引脚*/															   </span><br><span class="line">	InitStruct.GPIO_Pin = GPIO_Pin_6;</span><br><span class="line">	/*设置引脚模式为输出模式*/</span><br><span class="line">	InitStruct.GPIO_Mode = GPIO_Mode_OUT;</span><br><span class="line">	/*设置引脚的输出类型为推挽输出*/</span><br><span class="line">	InitStruct.GPIO_OType = GPIO_OType_PP;</span><br><span class="line">	/*设置引脚为上拉模式*/</span><br><span class="line">	InitStruct.GPIO_PuPd = GPIO_PuPd_UP;</span><br><span class="line">	/*设置引脚速率为2MHz */   </span><br><span class="line">	InitStruct.GPIO_Speed = GPIO_Speed_2MHz;</span><br><span class="line">	/*调用库函数，使用上面配置的GPIO_InitStructure初始化GPIO*/</span><br><span class="line">	GPIO_Init(GPIOF, &amp;InitStruct);	</span><br><span class="line"></span><br><span class="line">	/*使引脚输出低电平,点亮LED1*/</span><br><span class="line">	GPIO_ResetBits(GPIOF,GPIO_Pin_6);</span><br><span class="line"></span><br><span class="line">	/*延时一段时间*/</span><br><span class="line">	Delay(0xFFFFFF);	</span><br><span class="line">	</span><br><span class="line">	/*使引脚输出高电平，关闭LED1*/</span><br><span class="line">	GPIO_SetBits(GPIOF,GPIO_Pin_6);</span><br><span class="line">	</span><br><span class="line">	/*初始化PF7引脚*/</span><br><span class="line">	InitStruct.GPIO_Pin = GPIO_Pin_7;</span><br><span class="line">	GPIO_Init(GPIOF,&amp;InitStruct);</span><br><span class="line">	</span><br><span class="line">	/*使引脚输出低电平，点亮LED2*/</span><br><span class="line">	GPIO_ResetBits(GPIOF,GPIO_Pin_7);</span><br><span class="line"></span><br><span class="line">	while(1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//简单的延时函数，让cpu执行无意义指令，消耗时间</span><br><span class="line">//具体延时时间难以计算，以后我们可使用定时器精确延时</span><br><span class="line">void Delay( uint32_t nCount)	 </span><br><span class="line">&#123;</span><br><span class="line">	for(; nCount != 0; nCount--);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 函数为空，目的是为了骗过编译器不报错</span><br><span class="line">void SystemInit(void)</span><br><span class="line">&#123;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="搭建默认网页"><a href="#搭建默认网页" class="headerlink" title="搭建默认网页"></a>搭建默认网页</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">D:			#切换到D盘</span><br><span class="line">md hexo			#创建hexo文件夹</span><br><span class="line">cd hexo			#进入到hexo文件夹</span><br><span class="line">hexo init			#hexo初始化</span><br><span class="line">hexo s			#本地搭建网页</span><br></pre></td></tr></table></figure>
-<p>打开浏览器打开<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a><br>至此可以看到已经搭建好了默认的网页</p>
-<h3 id="编辑blog"><a href="#编辑blog" class="headerlink" title="编辑blog"></a>编辑blog</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;my-first-blog&quot;	#my-first-blog为标题，自定义</span><br><span class="line">vim my-first-blog.md	#使用vim编辑器</span><br></pre></td></tr></table></figure>
-<p>按i进入编辑模式，随便输入一点内容<br>编辑完成后按esc<br>输入:wq保存退出<br>至此你的post搭建完成</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ..			#返回上一级</span><br><span class="line">cd ..			#返回上一级，现在又回到位置hexo了</span><br><span class="line">hexo clean		#删除之前搭建好的网页文件</span><br><span class="line">hexo g			#生成新的网页文件</span><br><span class="line">hexo s			</span><br></pre></td></tr></table></figure>
-<p>至此可以看到第一篇博客</p>
-<h3 id="上传github-pages"><a href="#上传github-pages" class="headerlink" title="上传github pages"></a>上传github pages</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install --save hexo-deployer-git	#安装hexo-deployer-git</span><br><span class="line">vim _config.yml			#编辑配置文件</span><br></pre></td></tr></table></figure>
-<p>修改最后为:<br>  type: git<br>  repo: <a target="_blank" rel="noopener" href="https://github.com/oldsixyaoyao/oldsixyaoyao.github.io.git">https://github.com/oldsixyaoyao/oldsixyaoyao.github.io.git</a><br>  branch: master<br>至此配置完成</p>
-<p>在github中建立一个仓库，名称为oldsixyaoyao.github.io</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d			#推送到github上</span><br></pre></td></tr></table></figure>
-<p>注：第一次用git可能要你登录账号密码<br>至此可以用oldsixyaoyao.github.io访问你的网站了</p>
-<h3 id="切换主题yilia"><a href="#切换主题yilia" class="headerlink" title="切换主题yilia"></a>切换主题yilia</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia	#克隆主题仓库</span><br><span class="line">vim _config.yml</span><br></pre></td></tr></table></figure>
-<p>把theme: landscape改成theme: yilia<br>再重新上传到github仓库就可以了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<h3 id="2-初始化库函数GPIO-Init"><a href="#2-初始化库函数GPIO-Init" class="headerlink" title="2.  初始化库函数GPIO_Init"></a><font color=CornFlowerBlue>2.  初始化库函数GPIO_Init</font></h3><h4 id="2-1-初始化结构体GPIO-InitTypeDef"><a href="#2-1-初始化结构体GPIO-InitTypeDef" class="headerlink" title="2.1 初始化结构体GPIO_InitTypeDef"></a><font color=SkyBlue>2.1 初始化结构体GPIO_InitTypeDef</font></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">typedef struct &#123;</span><br><span class="line">	uint32_t GPIO_Pin;</span><br><span class="line">	GPIOMode_TypeDef GPIO_Mode;</span><br><span class="line">	GPIOSpeed_TypeDef GPIO_Speed;</span><br><span class="line">	GPIOOType_TypeDef GPIO_OType;</span><br><span class="line">	GPIOPuPd_TypeDef GPIO_PuPd;</span><br><span class="line">&#125; GPIO_InitTypeDef;</span><br></pre></td></tr></table></figure>
 
+<p>例如，GPIOMode_TypeDef&#x3D;&#x3D;(第一层)&#x3D;&#x3D;是一个枚举类型的指针，定义了GPIO_Mode只能取GPIO_Mode_IN、GPIO_Mode_OUT、GPIO_Mode_AF、GPIO_Mode_AN四种类型</p>
+<p>所有枚举组合起来得到了GPIO_InitTypeDef&#x3D;&#x3D;(第二层)&#x3D;&#x3D;指针（枚举类型见P130）</p>
+<p>因此只需要先定义一个对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GPIO_InitTypeDef InitStruct;</span><br></pre></td></tr></table></figure>
 
+<p>然后将对象变量用枚举类型初始化，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InitStruct.GPIO_Pin = GPIO_Pin_6;</span><br></pre></td></tr></table></figure>
 
+<p>再代入初始化库函数即可完成配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GPIO_Init(GPIOF, &amp;InitStruct);</span><br></pre></td></tr></table></figure>
 
+<h3 id="3-引脚输出高低电平"><a href="#3-引脚输出高低电平" class="headerlink" title="3. 引脚输出高低电平"></a><font color=CornFlowerBlue>3. 引脚输出高低电平</font></h3><p>对于寄存器操作，BSRR寄存器不能直接赋值，不能让高位复位和低位置位同时为1</p>
+<p>所以在结构体指针操作中，将BSRR分开编程BSRRH和BSRRL，这样就可以直接赋值而不用担心写高位会影响低位，写低位会影响高位的问题了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void GPIO_SetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)</span><br><span class="line">&#123;</span><br><span class="line">	GPIOx-&gt;BSRRL = GPIO_Pin;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)</span><br><span class="line">&#123;</span><br><span class="line">	GPIOx-&gt;BSRRH = GPIO_Pin;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-
-
+<p>例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//控制 GPIOH 的引脚 10 输出高电平</span><br><span class="line">GPIO_SetBits(GPIOH,(uint16_t)(1&lt;&lt;10));</span><br><span class="line">//控制 GPIOH 的引脚 10、引脚 11 输出高电平</span><br><span class="line">GPIO_SetBits(GPIOH,(uint16_t)(1&lt;&lt;10)|(uint16_t)(1&lt;&lt;11));</span><br></pre></td></tr></table></figure>
 
 
 
@@ -259,27 +254,22 @@
   
     
 <nav id="article-nav">
-  <a class="article-nav-btn left "
-    
-      href="/2024/07/16/1.%E7%83%A7%E5%BD%95stm32%E7%A8%8B%E5%BA%8F/"
-      title="烧录stm32程序"
+  <a class="article-nav-btn left  disabled "
      >
     <i class="fa-solid fa-angle-left"></i>
     <p class="title-text">
-      
-        烧录stm32程序
         
     </p>
   </a>
   <a class="article-nav-btn right "
     
-      href="/2024/07/11/my-first-blog/"
-      title="陈淑洁是大笨蛋"
+      href="/2024/07/16/2.%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/"
+      title="寄存器编程"
      >
 
     <p class="title-text">
       
-        陈淑洁是大笨蛋
+        寄存器编程
         
     </p>
     <i class="fa-solid fa-angle-right"></i>

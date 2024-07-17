@@ -150,14 +150,14 @@
     <div class="widget">
       <h3 class="widget-title">Categories</h3>
       <div class="category-box">
+            <a class="category-link" href="/categories/stm32/">
+                stm32
+                <div class="category-count">3</div>
+            </a>
+        
             <a class="category-link" href="/categories/hexo%E6%94%BB%E7%95%A5/">
                 hexo攻略
                 <div class="category-count">1</div>
-            </a>
-        
-            <a class="category-link" href="/categories/stm32/">
-                stm32
-                <div class="category-count">2</div>
             </a>
         </div>
     </div>
@@ -176,7 +176,7 @@
    
 
 
-<article id="post-寄存器编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-3.自己搭库点亮LED" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
    
   <div class="article-inner">
     <div class="article-main">
@@ -187,7 +187,79 @@
   
     
       <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/16/%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/">寄存器编程</a>
+        <a class="p-name article-title" href="/2024/07/17/3.%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BA%93%E7%82%B9%E4%BA%AELED/">固件库点亮LED</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-17T12:15:46.000Z" itemprop="datePublished">2024-07-17</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/stm32/">stm32</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.2k words 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              1.  使用库函数的全新代码前提：stm32f4xx.h定义了基地址和寄存器；stm32f4xx_gpio.h定义了枚举，结构体和引脚号偏移地址并且声明了函数；stm32fxx_gpio.c定义了初始化和置位复位函数
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263/*	自己写库的方法点亮LED灯  */#include &quot;stm32f4xx_gpio.h&quot;  void Delay( uint32_t nCount); /**  *   主函数，使用封装好的函数来控制LED灯  */int main(void)&#123;		GPIO_InitTypeDef InitStruct;		/*开启 GPIOF 时钟，使用外设时都要先开启它的时钟*/	RCC-&gt;AHB1ENR |= (1&lt;&lt;5);	/* LED 端口初始化 */		/*初始化PF6引脚*/	/*选择...
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/17/3.%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BA%93%E7%82%B9%E4%BA%AELED/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+   
+
+
+<article id="post-2.寄存器编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/16/2.%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/">寄存器编程</a>
       </h1>
     
   
@@ -237,7 +309,7 @@ ARM架构将4GB平均分成8个block，每个存储器512MB
      
     <a class="right-panel  non-pic  "
       
-      href="/2024/07/16/%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/" 
+      href="/2024/07/16/2.%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
@@ -257,7 +329,7 @@ ARM架构将4GB平均分成8个block，每个存储器512MB
    
 
 
-<article id="post-烧录stm32程序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-1.烧录stm32程序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
    
   <div class="article-inner">
     <div class="article-main">
@@ -268,7 +340,7 @@ ARM架构将4GB平均分成8个block，每个存储器512MB
   
     
       <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/16/%E7%83%A7%E5%BD%95stm32%E7%A8%8B%E5%BA%8F/">烧录stm32程序</a>
+        <a class="p-name article-title" href="/2024/07/16/1.%E7%83%A7%E5%BD%95stm32%E7%A8%8B%E5%BA%8F/">烧录stm32程序</a>
       </h1>
     
   
@@ -312,7 +384,7 @@ ARM架构将4GB平均分成8个block，每个存储器512MB
      
     <a class="right-panel  non-pic  "
       
-      href="/2024/07/16/%E7%83%A7%E5%BD%95stm32%E7%A8%8B%E5%BA%8F/" 
+      href="/2024/07/16/1.%E7%83%A7%E5%BD%95stm32%E7%A8%8B%E5%BA%8F/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
