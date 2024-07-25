@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet">
+<link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>通用同步异步收发器(USART) | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="1.  初始化USART1.1 配置GPIO123456789101112131415161718&#x2F;&#x2F;PA9:TX PA10:RX&#x2F;&#x2F;开启时钟RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);&#x2F;&#x2F;初始化PA9GPIO_InitTypeDef GPIO_InitStruct;&#x2F;&#x2F;对于复用输出功能，端口必须配置成复用功能输出模式(推挽或开漏)，开漏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通用同步异步收发器(USART)">
+<meta property="og:url" content="http://example.com/2024/07/25/Intelligent_cloud_home/%E9%80%9A%E7%94%A8%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5%E6%94%B6%E5%8F%91%E5%99%A8(USART)/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.  初始化USART1.1 配置GPIO123456789101112131415161718&#x2F;&#x2F;PA9:TX PA10:RX&#x2F;&#x2F;开启时钟RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);&#x2F;&#x2F;初始化PA9GPIO_InitTypeDef GPIO_InitStruct;&#x2F;&#x2F;对于复用输出功能，端口必须配置成复用功能输出模式(推挽或开漏)，开漏">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldsixyaoyao/bedpicture/main/img/%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/oldsixyaoyao/bedpicture/main/img/%E5%8F%91%E9%80%81.png">
+<meta property="article:published_time" content="2024-07-25T02:20:40.000Z">
+<meta property="article:modified_time" content="2024-07-25T03:30:34.917Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/oldsixyaoyao/bedpicture/main/img/%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="https://raw.githubusercontent.com/oldsixyaoyao/bedpicture/main/img/background.webp" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="  ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Hexo </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M198-120q-25.846 0-44.23-18.384-18.384-18.385-18.384-44.23 0-25.846 18.384-44.23 18.384-18.385 44.23-18.385 25.846 0 44.23 18.385 18.384 18.384 18.384 44.23 0 25.845-18.384 44.23Q223.846-120 198-120Zm538.385 0q-18.846 0-32.923-13.769-14.076-13.769-15.922-33.23-8.692-100.616-51.077-188.654-42.385-88.039-109.885-155.539-67.5-67.501-155.539-109.885Q283-663.462 182.385-672.154q-19.461-1.846-33.23-16.23-13.769-14.385-13.769-33.846t14.076-32.922q14.077-13.461 32.923-12.23 120.076 8.692 226.038 58.768 105.961 50.077 185.73 129.846 79.769 79.769 129.846 185.731 50.077 105.961 58.769 226.038 1.231 18.846-12.538 32.922Q756.461-120 736.385-120Zm-252 0q-18.231 0-32.423-13.461t-18.653-33.538Q418.155-264.23 348.886-333.5q-69.27-69.27-166.501-84.423-20.077-4.462-33.538-18.961-13.461-14.5-13.461-33.346 0-19.076 13.884-33.23 13.884-14.153 33.115-10.922 136.769 15.384 234.384 112.999 97.615 97.615 112.999 234.384 3.231 19.23-10.538 33.115Q505.461-120 484.385-120Z"/></svg>
+      </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=https://raw.githubusercontent.com/oldsixyaoyao/bedpicture/main/img/face.jfif></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Oldsix Yaoyao </div>
+      <div class="dot"></div>
+      <div class="subtitle">/RTfCaT4x8mMEh+eyIElTGT nEUpPlCcgHbo82qUpbrY= </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/oldsixyaoyao" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Categories</h3>
+      <div class="category-box">
+            <a class="category-link" href="/categories/Intelligent-Cloud-Home/">
+                Intelligent Cloud Home
+                <div class="category-count">7</div>
+            </a>
+        
+            <a class="category-link" href="/categories/stm32/">
+                stm32
+                <div class="category-count">3</div>
+            </a>
+        
+            <a class="category-link" href="/categories/hexo%E6%94%BB%E7%95%A5/">
+                hexo攻略
+                <div class="category-count">1</div>
+            </a>
+        </div>
+    </div>
+  </div>
+
+
+    
+      
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+
+<article id="post-Intelligent_cloud_home/通用同步异步收发器(USART)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        通用同步异步收发器(USART)
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-25T02:20:40.000Z" itemprop="datePublished">2024-07-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Intelligent-Cloud-Home/">Intelligent Cloud Home</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            3.2k words 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h3 id="1-初始化USART"><a href="#1-初始化USART" class="headerlink" title="1.  初始化USART"></a><font color=CornFlowerBlue>1.  初始化USART</font></h3><h4 id="1-1-配置GPIO"><a href="#1-1-配置GPIO" class="headerlink" title="1.1 配置GPIO"></a><font color=SkyBlue>1.1 配置GPIO</font></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//PA9:TX PA10:RX</span><br><span class="line">//开启时钟</span><br><span class="line">RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);</span><br><span class="line"></span><br><span class="line">//初始化PA9</span><br><span class="line">GPIO_InitTypeDef GPIO_InitStruct;</span><br><span class="line">//对于复用输出功能，端口必须配置成复用功能输出模式(推挽或开漏)，开漏不能输出高电平，故选择推挽</span><br><span class="line">GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF_PP;        //复用推挽输出</span><br><span class="line">GPIO_InitStruct.GPIO_Pin = GPIO_Pin_9;</span><br><span class="line">GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;</span><br><span class="line">GPIO_Init(GPIOA,&amp;GPIO_InitStruct);</span><br><span class="line"></span><br><span class="line">//初始PA10</span><br><span class="line">//对于复用的输入功能，端口必须配置成输入模式(浮空、上拉或下拉)且输入引脚必须由外部驱动</span><br><span class="line">GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN_FLOATING;  </span><br><span class="line">GPIO_InitStruct.GPIO_Pin = GPIO_Pin_10;</span><br><span class="line">GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;</span><br><span class="line">GPIO_Init(GPIOA,&amp;GPIO_InitStruct);</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-配置USART"><a href="#1-2-配置USART" class="headerlink" title="1.2 配置USART"></a><font color=SkyBlue>1.2 配置USART</font></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//开启时钟</span><br><span class="line">RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);</span><br><span class="line">	</span><br><span class="line">USART_InitTypeDef USART_InitStruct;</span><br><span class="line">//1波特即指每秒传输1个符号，而通过不同的调制方式，可以在一个码元符号上负载多个bit位信息。</span><br><span class="line">//和比特率类似，你只需要把波特率中的“波特”（也就是码元符号）理解为一个传输单元即可。</span><br><span class="line">USART_InitStruct.USART_BaudRate = 115200; //波特率</span><br><span class="line">USART_InitStruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None;</span><br><span class="line">USART_InitStruct.USART_Mode = USART_Mode_Tx | USART_Mode_Rx;</span><br><span class="line">USART_InitStruct.USART_Parity = USART_Parity_No;    //无校验位</span><br><span class="line">USART_InitStruct.USART_StopBits = USART_StopBits_1; //1位停止位</span><br><span class="line">USART_InitStruct.USART_WordLength = USART_WordLength_8b;    //8字长</span><br><span class="line"></span><br><span class="line">USART_Init(USART1, &amp;USART_InitStruct);//串口号，初始化结构体</span><br><span class="line"></span><br><span class="line">//TXNE中断设置，当寄存器非空时，32要从寄存器里面取数据</span><br><span class="line">USART_ITConfig(USART1,USART_IT_RXNE,ENABLE);</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-中断配置NVIC"><a href="#1-3-中断配置NVIC" class="headerlink" title="1.3 中断配置NVIC"></a><font color=SkyBlue>1.3 中断配置NVIC</font></h4><p><img src="https://raw.githubusercontent.com/oldsixyaoyao/bedpicture/main/img/%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7.jpg"></p>
+<p>只能选择一个分组，每个分组优先级的分配不同，抢占优先级先，响应优先级后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//中断分组</span><br><span class="line">NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);</span><br><span class="line">NVIC_InitTypeDef  NVIC_InitStruct;</span><br><span class="line">NVIC_InitStruct.NVIC_IRQChannel = USART1_IRQn;</span><br><span class="line">NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 1;  //抢占优先级</span><br><span class="line">NVIC_InitStruct.NVIC_IRQChannelSubPriority = 1;         //响应优先级</span><br><span class="line">NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;            //启用NVIC</span><br><span class="line">NVIC_Init(&amp;NVIC_InitStruct);</span><br><span class="line"></span><br><span class="line">USART_Cmd(USART1,ENABLE);   //最后启用USART</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-发送字节"><a href="#2-发送字节" class="headerlink" title="2.  发送字节"></a><font color=CornFlowerBlue>2.  发送字节</font></h3><p><img src="https://raw.githubusercontent.com/oldsixyaoyao/bedpicture/main/img/%E5%8F%91%E9%80%81.png"></p>
+<p>注意TXE</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//发送字节</span><br><span class="line">void uart_sendbyte(u8 byte)</span><br><span class="line">&#123;</span><br><span class="line">	while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET);</span><br><span class="line">	USART_ClearFlag(USART1, USART_FLAG_TXE);</span><br><span class="line">	USART_SendData(USART1, byte);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-发送字符串"><a href="#3-发送字符串" class="headerlink" title="3.  发送字符串"></a><font color=CornFlowerBlue>3.  发送字符串</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//发送字符串</span><br><span class="line">void uart_sendstring(char *str)</span><br><span class="line">&#123;</span><br><span class="line">	while(*str != &#x27;\0&#x27;)</span><br><span class="line">		uart_sendbyte(*str++);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-接收数据"><a href="#4-接收数据" class="headerlink" title="4.  接收数据"></a><font color=CornFlowerBlue>4.  接收数据</font></h3><p>&#x2F;&#x2F;RXNE位被置位。它表明移位寄存器的内容被转移到RDR。换句话说，数据已经被接收并且可以被读出(包括与之有关的错误标志)。<br>&#x2F;&#x2F;如果RXNEIE位被设置，产生中断。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">void USART1_IRQHandler(void)</span><br><span class="line">&#123;</span><br><span class="line">	static u8 i = 0;</span><br><span class="line">	static char buf[50];</span><br><span class="line">	if(USART_GetITStatus(USART1,USART_IT_RXNE) == SET)</span><br><span class="line">	&#123;</span><br><span class="line">		buf[i++] = USART_ReceiveData(USART1);</span><br><span class="line">		uart_sendbyte(buf[i-1]);</span><br><span class="line">		if(buf[i - 2] == &#x27;\r&#x27; || buf[i-1] == &#x27;\n&#x27;)</span><br><span class="line">		&#123;</span><br><span class="line">			buf[i] = &#x27;\0&#x27;;</span><br><span class="line">			i = 0;</span><br><span class="line">		&#125;	</span><br><span class="line">        //用于匹配如果需要的话</span><br><span class="line">//		if(strcmp(buf,&quot;LED1ON\r\n&quot;) == 0)  LED1ON;          </span><br><span class="line">//		else if(strcmp(buf,&quot;LED1OFF\r\n&quot;) == 0)  LED1OFF;   </span><br><span class="line">	    </span><br><span class="line">		USART_ClearITPendingBit(USART1,USART_IT_RXNE); //清空标志位</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-其他"><a href="#5-其他" class="headerlink" title="5.  其他"></a><font color=CornFlowerBlue>5.  其他</font></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//重定向不要声明</span><br><span class="line">int fputc(int ch, FILE* c)&#123;</span><br><span class="line">	uart_sendbyte(ch);</span><br><span class="line">	return ch;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//发送数字</span><br><span class="line">void uart_sendnumber(int number)</span><br><span class="line">&#123;</span><br><span class="line">	char buffer[12];//最长的 32 位整数（-2147483648 到 2147483647）需要11个字符（包括负号）,加上字符串终止符 \0，所以需要12个字符。</span><br><span class="line">	sprintf(buffer, &quot;%d&quot;, number);</span><br><span class="line">	uart_sendstring(buffer);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//发送数组s</span><br><span class="line">void uart_sendarray(int *array)&#123;</span><br><span class="line">	int size = sizeof(array) / sizeof(array[0]);</span><br><span class="line">	for (int i = 0; i &lt; size; i++) &#123;</span><br><span class="line">		uart_sendnumber(array[i]);</span><br><span class="line">		if (i &lt; size - 1) &#123;</span><br><span class="line">			uart_sendbyte(&#x27;,&#x27;);  // 发送逗号作为分隔符</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	uart_sendbyte(&#x27;\n&#x27;);  // 发送换行符表示数组结束</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left "
+    
+      href="/2024/07/25/Intelligent_cloud_home/%E6%8C%89%E9%94%AE/"
+      title="按键"
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        按键
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/07/17/stm32/3.%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BA%93%E7%82%B9%E4%BA%AELED/"
+      title="固件库点亮LED"
+     >
+
+    <p class="title-text">
+      
+        固件库点亮LED
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 Oldsix Yaoyao<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

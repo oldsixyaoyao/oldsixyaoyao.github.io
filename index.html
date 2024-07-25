@@ -150,14 +150,19 @@
     <div class="widget">
       <h3 class="widget-title">Categories</h3>
       <div class="category-box">
-            <a class="category-link" href="/categories/hexo%E6%94%BB%E7%95%A5/">
-                hexo攻略
-                <div class="category-count">1</div>
+            <a class="category-link" href="/categories/Intelligent-Cloud-Home/">
+                Intelligent Cloud Home
+                <div class="category-count">7</div>
             </a>
         
             <a class="category-link" href="/categories/stm32/">
                 stm32
                 <div class="category-count">3</div>
+            </a>
+        
+            <a class="category-link" href="/categories/hexo%E6%94%BB%E7%95%A5/">
+                hexo攻略
+                <div class="category-count">1</div>
             </a>
         </div>
     </div>
@@ -173,6 +178,516 @@
     </div>
     <div id="content-body">
       
+   
+
+
+<article id="post-Intelligent_cloud_home/直流电机" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/25/Intelligent_cloud_home/%E7%9B%B4%E6%B5%81%E7%94%B5%E6%9C%BA/">直流电机</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-25T09:59:33.000Z" itemprop="datePublished">2024-07-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Intelligent-Cloud-Home/">Intelligent Cloud Home</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.7k words 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              1.  配置GPIO重映射，时基单元，输出比较模式
+由于直流电机引脚上并没有计时器，查阅发现TIM3的CH1和CH2对PB8和PB9有重映射
+
+12345678910111213141516171819202122232425262728293031323334353637383940414243void dcmotor_init()&#123;	//引脚	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);	//AFIO复用引脚重映射，8.3表42 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);	GPIO_PinRemapConfig(GPIO_PartialRemap_TIM3, ENABLE);	//打开定时器3的复用重映射	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);		GPIO_Init...
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/25/Intelligent_cloud_home/%E7%9B%B4%E6%B5%81%E7%94%B5%E6%9C%BA/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+   
+
+
+<article id="post-Intelligent_cloud_home/步进电机" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/25/Intelligent_cloud_home/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA/">步进电机</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-25T09:38:50.000Z" itemprop="datePublished">2024-07-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Intelligent-Cloud-Home/">Intelligent Cloud Home</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.9k words 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              1.  配置GPIO，时基单元，中断1234567891011121314151617181920212223242526272829303132333435void motor_init()&#123;		//初始化GPIO口	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);		GPIO_InitTypeDef GPIO_InitStruct;	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;	GPIO_Init(GPIOA, &amp;GPIO_InitStruct);	//选择内部时钟	TIM_InternalClockCon...
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/25/Intelligent_cloud_home/%E6%AD%A5%E8%BF%9B%E7%94%B5%E6%9C%BA/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+   
+
+
+<article id="post-Intelligent_cloud_home/定时器中断" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/25/Intelligent_cloud_home/%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/">定时器中断</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-25T09:28:20.000Z" itemprop="datePublished">2024-07-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Intelligent-Cloud-Home/">Intelligent Cloud Home</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.3k words 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              1.  配置时基单元1234567891011121314151617181920212223242526272829void timer_init()&#123;    //开启时钟	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);		//选择内部时钟，注释掉就是默认，这里是72MHz	TIM_InternalClockConfig(TIM3);		//配置时基单元	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStruct;	TIM_TimeBaseInitStruct.TIM_Prescaler = 7200 - 1;				//100us 预分频PSC STM32手册图145因为0表示1，1表示2	TIM_TimeBaseInitStruct.TIM_ClockDivision = TIM_CKD_DIV1;		//就是除以1表示不分频	TIM_TimeBaseInitStruct.TIM_CounterMode = TIM_CounterMode_Up;    //向上计数	TIM...
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/25/Intelligent_cloud_home/%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+   
+
+
+<article id="post-Intelligent_cloud_home/温湿度传感器DHT11" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/25/Intelligent_cloud_home/%E6%B8%A9%E6%B9%BF%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8DHT11/">温湿度传感器DHT11</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-25T09:05:13.000Z" itemprop="datePublished">2024-07-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Intelligent-Cloud-Home/">Intelligent Cloud Home</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.7k words 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              单总线协议（One-Wire Protocol）是一种使用单根数据线进行通信的协议。这条数据线同时负责发送和接收数据，通常还需要一个上拉电阻将数据线在空闲时拉高到高电平。
+1.  配置GPIO
+要将PB3作为一个普通IO口，需要禁用 JTAG 调试接口，同时保留 SWD（Serial Wire Debug，串行线调试）接口
+
+使用开漏输出模式，外接一个上拉电阻
+1234567891011121314151617void DHT11_init()&#123;	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);	    //AFIO用于管理IO口的复用功能	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);		GPIO_InitTypeDef GPIO_InitStruct;	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_OD...
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/25/Intelligent_cloud_home/%E6%B8%A9%E6%B9%BF%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8DHT11/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+   
+
+
+<article id="post-Intelligent_cloud_home/RGB彩灯" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/25/Intelligent_cloud_home/RGB%E5%BD%A9%E7%81%AF/">RGB彩灯</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-25T03:38:26.000Z" itemprop="datePublished">2024-07-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Intelligent-Cloud-Home/">Intelligent Cloud Home</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1k words 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              使用P9813芯片来驱动RGB彩灯，输入的RGB值输出对应颜色
+1.  配置GPIO123456789101112void rgb_init(void)&#123;	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);		GPIO_InitTypeDef GPIO_InitStruct;	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_9 | GPIO_Pin_8;	GPIO_Init(GPIOB, &amp;GPIO_InitStruct);	GPIO_ResetBits(GPIOB, GPIO_Pin_9 | GPIO_Pin_8);&#125;
+
+2.  32位配置信息
+12345678910111213141516void SetColor(u8 r, u8 g, u8 b)&#123;	u32 color = ...
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/25/Intelligent_cloud_home/RGB%E5%BD%A9%E7%81%AF/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+   
+
+
+<article id="post-Intelligent_cloud_home/按键" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/25/Intelligent_cloud_home/%E6%8C%89%E9%94%AE/">按键</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-25T03:29:43.000Z" itemprop="datePublished">2024-07-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Intelligent-Cloud-Home/">Intelligent Cloud Home</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1k words 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              1.  配置GPIO初始化GPIO
+12345678910111213141516void key_init(void)&#123;	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);  //开启GPIOA的时钟	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);  //开启GPIOA的时钟	GPIO_InitTypeDef GPIO_InitStruct;	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN_FLOATING; //由于按键已经自带一个下拉电阻，所以直接浮空输入即可	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_8;	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;	GPIO_Init(GPIOA, &amp;GPIO_InitStruct);	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN_FLO...
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/25/Intelligent_cloud_home/%E6%8C%89%E9%94%AE/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+   
+
+
+<article id="post-Intelligent_cloud_home/通用同步异步收发器(USART)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/25/Intelligent_cloud_home/%E9%80%9A%E7%94%A8%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5%E6%94%B6%E5%8F%91%E5%99%A8(USART)/">通用同步异步收发器(USART)</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-25T02:20:40.000Z" itemprop="datePublished">2024-07-25</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Intelligent-Cloud-Home/">Intelligent Cloud Home</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            3.2k words 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              1.  初始化USART1.1 配置GPIO123456789101112131415161718//PA9:TX PA10:RX//开启时钟RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);//初始化PA9GPIO_InitTypeDef GPIO_InitStruct;//对于复用输出功能，端口必须配置成复用功能输出模式(推挽或开漏)，开漏不能输出高电平，故选择推挽GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF_PP;        //复用推挽输出GPIO_InitStruct.GPIO_Pin = GPIO_Pin_9;GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;GPIO_Init(GPIOA,&amp;GPIO_InitStruct);//初始PA10//对于复用的输入功能，端口必须配置成输入模式(浮空、上拉或下拉)且输入引脚必须由外部驱动GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN_FLOATING...
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/25/Intelligent_cloud_home/%E9%80%9A%E7%94%A8%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5%E6%94%B6%E5%8F%91%E5%99%A8(USART)/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+
    
 
 
@@ -401,155 +916,19 @@ ARM架构将4GB平均分成8个block，每个存储器512MB
 
 
 
-   
 
-
-<article id="post-hexo/hexo-github搭建个人博客" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/12/hexo/hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">hexo+github搭建个人博客</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-11T17:03:53.000Z" itemprop="datePublished">2024-07-12</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/hexo%E6%94%BB%E7%95%A5/">hexo攻略</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            1.1k words 
-          </div>
-        </div>
-        
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            
-              说明使用win+X，点击Windows PowerShell（管理员）进入PowerShell(vim可选)不用vim就直接打开文件即可能查看版本不报错就是说明安装好了
-下载nodejs进入官网下载nodejs，在PowerShell中使用以下命令安装hexo
-123456node -v			#查看nodejs版本npm -v			#查看npm版本npm install -g cnpm	#安装cnpm，-g表示全局安装Set-ExecutionPolicy RemoteSigned	#输入Acnpm install -g hexo-cli	#安装hexohexo -v			#查看hexo版本
-
-搭建默认网页12345D:			#切换到D盘md hexo			#创建hexo文件夹cd hexo			#进入到hexo文件夹hexo init			#hexo初始化hexo s			#本地搭建网页
-打开浏览器打开http://localhost:4000/至此可以看到已经搭建好了默认的网页
-编辑blog12hexo n &quot;my-first-blog&quot;	#my-firs...
-            
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/12/hexo/hexo-github%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
+  <nav id="page-nav">
+    <!-- 在第二页时 page.prev_link 不知为何无法返回正确的链接 -->
+    <a id="prev-btn" class="page-nav-btn disabled" href=" /  ">
+      <i class="fa-solid fa-angle-left"></i>
     </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-   
-
-
-<article id="post-sundry/my-first-blog" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/11/sundry/my-first-blog/">陈淑洁是大笨蛋</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-10T16:55:07.000Z" itemprop="datePublished">2024-07-11</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-    Uncategorized 
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            35 words 
-          </div>
-        </div>
-        
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            
-              AES加密模式：ECB填充：pkcs7padding密钥长度：128位
-
-            
-          </div>
-        
-      </div>
-
-         
+    <div id="num-bar">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a>  
     </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/11/sundry/my-first-blog/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
+    <a id="next-btn" class="page-nav-btn " href="/page/2/">
+      <i class="fa-solid fa-angle-right"></i>
     </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-
-
+  </nav>
 
 
     </div>
