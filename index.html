@@ -150,6 +150,11 @@
     <div class="widget">
       <h3 class="widget-title">Categories</h3>
       <div class="category-box">
+            <a class="category-link" href="/categories/hexo%E6%94%BB%E7%95%A5/">
+                hexo攻略
+                <div class="category-count">1</div>
+            </a>
+        
             <a class="category-link" href="/categories/Intelligent-Cloud-Home/">
                 Intelligent Cloud Home
                 <div class="category-count">7</div>
@@ -157,12 +162,7 @@
         
             <a class="category-link" href="/categories/stm32/">
                 stm32
-                <div class="category-count">3</div>
-            </a>
-        
-            <a class="category-link" href="/categories/hexo%E6%94%BB%E7%95%A5/">
-                hexo攻略
-                <div class="category-count">1</div>
+                <div class="category-count">4</div>
             </a>
         </div>
     </div>
@@ -178,6 +178,92 @@
     </div>
     <div id="content-body">
       
+   
+
+
+<article id="post-stm32/4.位带操作" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/26/stm32/4.%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C/">4.位带操作</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-26T03:54:24.000Z" itemprop="datePublished">2024-07-26</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/stm32/">stm32</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            573 words 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              1.  为什么需要位带操作假如我们需要点亮一盏LED灯，需要使得ODR这个位为0，那么stm32就无法直接对其赋值为0
+计算机内存是以字节为单位进行划分的，stm32则以4字节大小寻址
+所以我们将这些位膨胀32倍，也就是1位映射到4字节上，不过实际上这4字节只有最低位有效，其他31位是无效的
+这么做是因为F407的系统总线是32位的，按照4个字节访问的时候是最快的
+相关搜索：内存对齐
+2.  哪些地方可以位带操作一个是SRAM区的最低1MB空间，一般不去动
+另一个是外设区最低1MB空间，包括APB1，APB2，AHB1上所有外设的寄存器
+AHB2和AHB3是没有的
+3.  如何映射外设区
+1AliasAddr= =0x42000000+ (A-0x40000000)*8*4 +n*4
+
+SRAM区
+1AliasAddr= =0x22000000+ (A-0x20000000)*8*4 +n*4
+
+也可以统一公式
+1#define BITBAND(addr, bitnum) ((addr &amp; 0xF0000000)+0x02000000+((addr &amp;0x000F...
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/26/stm32/4.%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+
    
 
 
@@ -702,7 +788,7 @@
   
     
       <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/17/stm32/3.%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BA%93%E7%82%B9%E4%BA%AELED/">固件库点亮LED</a>
+        <a class="p-name article-title" href="/2024/07/17/stm32/3.%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BA%93%E7%82%B9%E4%BA%AELED/">3.固件库点亮LED</a>
       </h1>
     
   
@@ -774,7 +860,7 @@
   
     
       <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/16/stm32/2.%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/">寄存器编程</a>
+        <a class="p-name article-title" href="/2024/07/16/stm32/2.%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/">2.寄存器编程</a>
       </h1>
     
   
@@ -825,81 +911,6 @@ ARM架构将4GB平均分成8个block，每个存储器512MB
     <a class="right-panel  non-pic  "
       
       href="/2024/07/16/stm32/2.%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-   
-
-
-<article id="post-stm32/1.烧录stm32程序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/16/stm32/1.%E7%83%A7%E5%BD%95stm32%E7%A8%8B%E5%BA%8F/">烧录stm32程序</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-16T08:11:26.000Z" itemprop="datePublished">2024-07-16</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/stm32/">stm32</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            254 words 
-          </div>
-        </div>
-        
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            
-              keil_MDK中的设置安装好芯片包-魔法棒
--Device选择对应的芯片型号，比如f407
--Dubug中右上角选择CMSIS-DAP Debugger，然后进入Settings。–在Debug中，Port选择SW，Max Clock选择1MHz，上面的CMSIS-DAP会显示是否连接上；–在Flash Download中勾选Erase Sectors和Reset and Run-Utilities中勾选右上角的Use Debug Driver
-初识STM32MCU微控制器(不能运行在linux)，MPU微处理器命名规则：
-
-            
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/16/stm32/1.%E7%83%A7%E5%BD%95stm32%E7%A8%8B%E5%BA%8F/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>

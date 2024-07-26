@@ -14,19 +14,21 @@
   
 
   
-  <title>categories | Hexo</title>
+  <title>4.位带操作 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://example.com/categories/index.html">
+  <meta name="description" content="1.  为什么需要位带操作假如我们需要点亮一盏LED灯，需要使得ODR这个位为0，那么stm32就无法直接对其赋值为0 计算机内存是以字节为单位进行划分的，stm32则以4字节大小寻址 所以我们将这些位膨胀32倍，也就是1位映射到4字节上，不过实际上这4字节只有最低位有效，其他31位是无效的 这么做是因为F407的系统总线是32位的，按照4个字节访问的时候是最快的 相关搜索：内存对齐 2.  哪些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4.位带操作">
+<meta property="og:url" content="http://example.com/2024/07/26/stm32/4.%E4%BD%8D%E5%B8%A6%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.  为什么需要位带操作假如我们需要点亮一盏LED灯，需要使得ODR这个位为0，那么stm32就无法直接对其赋值为0 计算机内存是以字节为单位进行划分的，stm32则以4字节大小寻址 所以我们将这些位膨胀32倍，也就是1位映射到4字节上，不过实际上这4字节只有最低位有效，其他31位是无效的 这么做是因为F407的系统总线是32位的，按照4个字节访问的时候是最快的 相关搜索：内存对齐 2.  哪些">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-07-11T17:39:21.000Z">
-<meta property="article:modified_time" content="2024-07-11T17:39:38.864Z">
+<meta property="article:published_time" content="2024-07-26T03:54:24.000Z">
+<meta property="article:modified_time" content="2024-07-26T04:12:27.899Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -182,7 +184,9 @@
        
 
 
-<article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-stm32/4.位带操作" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
    
   <div class="article-inner">
     <div class="article-main">
@@ -193,7 +197,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        categories
+        4.位带操作
       </h1>
     
   
@@ -201,25 +205,46 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-11T17:39:21.000Z" itemprop="datePublished">2024-07-12</time>
+  <time class="dt-published" datetime="2024-07-26T03:54:24.000Z" itemprop="datePublished">2024-07-26</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-    Uncategorized 
+  <a class="meta-cate-link" href="/categories/stm32/">stm32</a>
    
 </div>
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            0 words 
+            573 words 
           </div>
         </div>
         
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          
+          <h3 id="1-为什么需要位带操作"><a href="#1-为什么需要位带操作" class="headerlink" title="1.  为什么需要位带操作"></a><font color=CornFlowerBlue>1.  为什么需要位带操作</font></h3><p>假如我们需要点亮一盏LED灯，需要使得ODR这个位为0，那么stm32就无法直接对其赋值为0</p>
+<p>计算机内存是以字节为单位进行划分的，stm32则以4字节大小寻址</p>
+<p>所以我们将这些位膨胀32倍，也就是1位映射到4字节上，不过实际上这4字节只有最低位有效，其他31位是无效的</p>
+<p>这么做是因为F407的系统总线是32位的，按照4个字节访问的时候是最快的</p>
+<p>相关搜索：内存对齐</p>
+<h3 id="2-哪些地方可以位带操作"><a href="#2-哪些地方可以位带操作" class="headerlink" title="2.  哪些地方可以位带操作"></a><font color=CornFlowerBlue>2.  哪些地方可以位带操作</font></h3><p>一个是SRAM区的最低1MB空间，一般不去动</p>
+<p>另一个是外设区最低1MB空间，包括APB1，APB2，AHB1上所有外设的寄存器</p>
+<p>AHB2和AHB3是没有的</p>
+<h3 id="3-如何映射"><a href="#3-如何映射" class="headerlink" title="3.  如何映射"></a><font color=CornFlowerBlue>3.  如何映射</font></h3><p>外设区</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AliasAddr= =0x42000000+ (A-0x40000000)*8*4 +n*4</span><br></pre></td></tr></table></figure>
+
+<p>SRAM区</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AliasAddr= =0x22000000+ (A-0x20000000)*8*4 +n*4</span><br></pre></td></tr></table></figure>
+
+<p>也可以统一公式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define BITBAND(addr, bitnum) ((addr &amp; 0xF0000000)+0x02000000+((addr &amp;0x000FFFFF)&lt;&lt;5)+(bitnum&lt;&lt;2))</span><br></pre></td></tr></table></figure>
+
+<p>实际操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*((volatile unsigned long *)(BITBAND(addr, bitnum))) = 0;</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以配置ODR使得LED灯点亮了</p>
+
         
       </div>
 
@@ -230,6 +255,29 @@
   </div>
   
     
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2024/07/25/Intelligent_cloud_home/%E7%9B%B4%E6%B5%81%E7%94%B5%E6%9C%BA/"
+      title="直流电机"
+     >
+
+    <p class="title-text">
+      
+        直流电机
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
 
   
 </article>
