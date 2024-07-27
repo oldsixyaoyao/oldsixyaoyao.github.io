@@ -155,14 +155,14 @@
                 <div class="category-count">1</div>
             </a>
         
+            <a class="category-link" href="/categories/stm32/">
+                stm32
+                <div class="category-count">5</div>
+            </a>
+        
             <a class="category-link" href="/categories/Intelligent-Cloud-Home/">
                 Intelligent Cloud Home
                 <div class="category-count">7</div>
-            </a>
-        
-            <a class="category-link" href="/categories/stm32/">
-                stm32
-                <div class="category-count">4</div>
             </a>
         </div>
     </div>
@@ -178,6 +178,88 @@
     </div>
     <div id="content-body">
       
+   
+
+
+<article id="post-stm32/5.RCC" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/07/27/stm32/5.RCC/">5.RCC</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-07-27T03:14:44.000Z" itemprop="datePublished">2024-07-27</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/stm32/">stm32</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.9k words 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              Reset and Clock Control
+1.  时钟树
+基本时钟描述：黄色部分
+外部晶振OSC(Oscillator)4~26MHz，有源只用接OSC_IN，无源要接OSC_IN和OSC_OUt
+HSE(High-Speed External Clock)高速外部时钟
+PLLCLK锁相环时钟，&#x2F;M分频变成1M进入VCO，再倍频xN变成336MHz，再分频&#x2F;P变成168MHz
+SYSCLK选择HSI内部晶振16MHz或者HSE或者PLLCLK的一个作为系统时钟
+(当外部晶振不起作用时，将启用内部晶振作为临时时钟，不过内部晶振精确度有所欠缺)
+AHB使用系统时钟
+APB2为系统时钟二分频得到84MHz
+APB1为系统时钟四分频得到42MHz
+2.  固件库配置外部时钟HSE1234567891011121314151617181920212223242526272829303132333435363738394041424344454647void HSE_SetSysClock(uint32_t PLLM, uint32_t PLLN, uint32_t...
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/07/27/stm32/5.RCC/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+
    
 
 
@@ -830,87 +912,6 @@ SRAM区
     <a class="right-panel  non-pic  "
       
       href="/2024/07/17/stm32/3.%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BA%93%E7%82%B9%E4%BA%AELED/" 
-    >
-       
-      <i class="fa-solid fa-angle-right non-pic"></i>
-       
-    </a>
-     
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-   
-
-
-<article id="post-stm32/2.寄存器编程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-   
-  <div class="article-inner">
-    <div class="article-main">
-      <header class="article-header">
-        
-<div class="main-title-bar">
-  <div class="main-title-dot"></div>
-  
-    
-      <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/07/16/stm32/2.%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/">2.寄存器编程</a>
-      </h1>
-    
-  
-</div>
-
-        <div class='meta-info-bar'>
-          <div class="meta-info">
-  <time class="dt-published" datetime="2024-07-16T11:37:24.000Z" itemprop="datePublished">2024-07-16</time>
-</div>
-          <div class="need-seperator meta-info">
-            <div class="meta-cate-flex">
-  
-  <a class="meta-cate-link" href="/categories/stm32/">stm32</a>
-   
-</div>
-  
-          </div>
-          <div class="wordcount need-seperator meta-info">
-            3.5k words 
-          </div>
-        </div>
-        
-      </header>
-      <div class="e-content article-entry" itemprop="articleBody">
-        
-          <div class="truncate-text">
-            
-              1. 寄存器芯片内核和外设之间通过各种总线连接，其中主控总线有 8 条，被控总线有 7 条
-连接被控总线的是 FLASH， RAM 和片上外设，这些功能部件共同排列在一个 4GB 的地址空间内
-ARM架构将4GB平均分成8个block，每个存储器512MB
-存储器映射就是给block分配地址
-其中block2设计的是片上外设，四字节(32bit)为一个单元，给这个特定地址取个别名就是寄存器映射
-2. 寄存器映射123//51sfr PA0 0x80PA0 = 0xff;
-12345//stm32强制转换成指针再解引用*(unsigned int*)(0x4002 1414) = 0xFFFF;//或者#define GPIOF_ODR *(unsigned int*)(0x4002 1414)GPIOF_ODR = 0xFFFF;
-其实就是寄存器映射
-3. C语言对寄存器的封装由于GPIOA~GPIOH都有一组功能相同的寄存器，偏移地址也相同，使用结构体进行封装
-偏移地址是以字节为单位，一条就是b位，所以uint32_t刚好就定义了这个结构变量的地址
-12345678910111...
-            
-          </div>
-        
-      </div>
-
-         
-    </div>
-    
-     
-    <a class="right-panel  non-pic  "
-      
-      href="/2024/07/16/stm32/2.%E5%AF%84%E5%AD%98%E5%99%A8%E7%BC%96%E7%A8%8B/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
